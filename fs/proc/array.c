@@ -137,7 +137,7 @@ static const char * const task_state_array[] = {
 	"S (sleeping)",		/*   1 */
 	"D (disk sleep)",	/*   2 */
 	"T (stopped)",		/*   4 */
-	"t (tracing stop)",	/*   8 */
+//	"t (tracing stop)",	/*   8 */
 	"Z (zombie)",		/*  16 */
 	"X (dead)",		/*  32 */
 	"x (dead)",		/*  64 */
@@ -151,7 +151,7 @@ static inline const char *get_task_state(struct task_struct *tsk)
 	unsigned int state = (tsk->state & TASK_REPORT) | tsk->exit_state;
 	const char * const *p = &task_state_array[0];
 
-	BUILD_BUG_ON(1 + ilog2(TASK_STATE_MAX) != ARRAY_SIZE(task_state_array));
+	//BUILD_BUG_ON(1 + ilog2(TASK_STATE_MAX) != ARRAY_SIZE(task_state_array));
 
 	while (state) {
 		p++;
@@ -191,7 +191,7 @@ static inline void task_state(struct seq_file *m, struct pid_namespace *ns,
 		get_task_state(p),
 		leader ? task_pid_nr_ns(leader, ns) : 0,
 		pid_nr_ns(pid, ns),
-		ppid, tpid,
+		ppid, /*tpid*/0,
 		from_kuid_munged(user_ns, cred->uid),
 		from_kuid_munged(user_ns, cred->euid),
 		from_kuid_munged(user_ns, cred->suid),
